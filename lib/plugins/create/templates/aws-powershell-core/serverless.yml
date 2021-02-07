@@ -1,0 +1,25 @@
+service:
+  name: aws-powershell-core
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: dotnetcore3.1
+  lambdaHashingVersion: 20201221
+
+package:
+  individually: true
+
+functions:
+  hello:
+    handler: Handler::Handler.Bootstrap::ExecuteFunction
+    package:
+      artifact: artifact.zip
+    # memory: 128
+    events:
+      - httpApi:
+          method: get
+          path: /
